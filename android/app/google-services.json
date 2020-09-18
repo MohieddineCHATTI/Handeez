@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "487341687225",
+    "firebase_url": "https://handeez.firebaseio.com",
+    "project_id": "handeez",
+    "storage_bucket": "handeez.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487341687225:android:16002de4d6f347e61b3668",
+        "android_client_info": {
+          "package_name": "com.mohie.handeez"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "487341687225-33pn9oq5pfqoihpmemf3bvsdoi2ugk6c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiPb6l-VeakIdlPA8bG39kZKPoIyelctE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "487341687225-33pn9oq5pfqoihpmemf3bvsdoi2ugk6c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
