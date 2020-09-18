@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:handeez/components/imageUpload/addProductImage.dart';
 import 'package:handeez/constants.dart';
 import 'package:handeez/provider/adminMode.dart';
 import 'package:handeez/provider/cartItems.dart';
@@ -26,6 +27,15 @@ void main() async{
   await Firebase.initializeApp();
   runApp(MyApp());
 }
+
+class Test extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: AddImage());
+  }
+}
+
+
 
 class MyApp extends StatelessWidget {
   bool isLoggedIn = false;

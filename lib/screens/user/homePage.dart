@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   if (currentUser!=null) Text(
-                    currentUser.displayName,
+                    currentUser.displayName ?? "User",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   Row(

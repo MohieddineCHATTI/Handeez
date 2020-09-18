@@ -1,15 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:handeez/components/customTextField.dart';
+import 'package:handeez/components/imageUpload/addProductImage.dart';
 import 'package:handeez/modals/product.dart';
 import 'package:handeez/services/store.dart';
 
 class AddProduct extends StatelessWidget {
   static String id = "addProduct";
-  String _name, _price, _category ,_decription, _imageLocation;
+  String _name, _price, _category ,_decription, _imageLocation, _url1, _url2, _url3;
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   final Store _store = Store();
   @override
   Widget build(BuildContext context) {
+    void setURL (int i , String url){
+      switch (i) {
+        case 1:
+          _url1 = url;
+          break;
+        case 2:
+            _url2 = url;
+          break;
+        case 3:
+            _url3 = url;
+          break;
+      }
+      print ("URL Added");
+      print("url 1: $_url1");
+      print("url 2: $_url2");
+      print("url 3: $_url3");
+
+    }
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top:50),
@@ -50,6 +69,8 @@ class AddProduct extends StatelessWidget {
                   _imageLocation = value;
                 },
               ),
+              SizedBox(height: 10,),
+              AddImage(setImageUrl: setURL,),
               SizedBox(height: 20,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 70),
