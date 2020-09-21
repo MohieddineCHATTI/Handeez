@@ -8,11 +8,12 @@ import 'package:handeez/screens/admin/Orders.dart';
 import 'package:handeez/screens/admin/addProduct.dart';
 import 'package:handeez/screens/admin/adminPage.dart';
 import 'package:handeez/screens/admin/editProduct.dart';
-import 'package:handeez/screens/admin/manageProduct.dart';
+import 'package:handeez/screens/admin/manageProducts.dart';
 import 'package:handeez/screens/admin/orderDetails.dart';
 import 'package:handeez/screens/loginScreen.dart';
 import 'package:handeez/screens/signUpScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:handeez/screens/user/aboutUs.dart';
 import 'package:handeez/screens/user/cart.dart';
 import 'package:handeez/screens/user/homePage.dart';
 import 'package:handeez/screens/user/productInfo.dart';
@@ -74,7 +75,8 @@ class MyApp extends StatelessWidget {
                 Cart.id: (context) => Cart(),
                 UpdateCartItem.id : (context) => UpdateCartItem(),
                 Orders.id: (context) => Orders(),
-                OrderDetails.id: (context) => OrderDetails()
+                OrderDetails.id: (context) => OrderDetails(),
+                AboutUS.id: (context)=> AboutUS(),
               },
             ),
 

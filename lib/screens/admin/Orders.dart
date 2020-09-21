@@ -11,6 +11,11 @@ class Orders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Orders"),
+        backgroundColor: mainColor,
+        centerTitle: true,
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _store.loadOrders(),
         builder: (context, snapshot) {
@@ -35,27 +40,40 @@ class Orders extends StatelessWidget {
                       Navigator.pushNamed(context, OrderDetails.id, arguments: orders[index].docId);
                     },
                     child: Container(
-                      height: MediaQuery.of(context).size.height * .2,
                       width: MediaQuery.of(context).size.width,
-                      color: secondaryColor,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Total Price = ${orders[index].totalPrice}",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "Client Address = ${orders[index].address}",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                      color: mainColor,
+                      child: Card(
+                        elevation: 2,
+                        color: secondaryColor,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Order Number : ${index+1}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                              Divider(thickness: 2,color: mainColor,),
+                              Text("Total Price : ${orders[index].totalPrice}",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w400),),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Client Address : ${orders[index].address}",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w400),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Client Number : 000-000-000-000",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

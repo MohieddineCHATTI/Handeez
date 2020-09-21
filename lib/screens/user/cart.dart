@@ -112,7 +112,7 @@ class Cart extends StatelessWidget {
               }
 
             }),
-          Builder(
+          cartItems.isNotEmpty ? Builder(
             builder: (context) => ButtonTheme(
               minWidth: screenWidth,
               height: screenHeight*.08,
@@ -126,13 +126,13 @@ class Cart extends StatelessWidget {
                 child: Text("order".toUpperCase(),style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold
-              ),),
+              ),) ,
                 onPressed: (){
                   showCustomDialog(context, cartItems);
                 },
                 color: mainColor,),
             ),
-          )
+          ) : Text("Please add products to cart first")
         ],
       ),
     );

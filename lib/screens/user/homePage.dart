@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:handeez/constants.dart';
 import 'package:handeez/modals/product.dart';
 import 'package:handeez/screens/loginScreen.dart';
+import 'package:handeez/screens/user/aboutUs.dart';
 import 'package:handeez/screens/user/cart.dart';
 import 'package:handeez/services/auth.dart';
 import 'package:handeez/services/store.dart';
@@ -37,6 +38,8 @@ class _HomePageState extends State<HomePage> {
               appBar: AppBar(
                 backgroundColor: mainColor,
                 elevation: 0,
+                title: (currentUser!=null && currentUser.displayName !=null) ? Text(
+                    currentUser.displayName, style: TextStyle(fontSize: 20,color: Colors.black, fontWeight: FontWeight.bold),): Text( "User", style: TextStyle(fontSize: 20,color: Colors.black, fontWeight: FontWeight.bold)),
                 bottom: TabBar(
                     indicatorColor: Colors.red,
                     onTap: (index) {
@@ -75,7 +78,36 @@ class _HomePageState extends State<HomePage> {
                             fontSize: _tabBarIndex == 3 ? 16 : null,
                           )),
                     ]),
+                actions: [IconButton(
+                        icon: Icon(Icons.shopping_cart, color: Colors.black,),
+                        onPressed: () {
+                          Navigator.pushNamed(context, Cart.id);
+                        },
+                      )],
+                iconTheme: IconThemeData( color: Colors.black),
               ),
+                drawer: Drawer(
+                  child: Container(
+                    color: secondaryColor,
+                    child: ListView(
+                      children: <Widget>[
+                        SizedBox(height: 30,),
+                        ListTile(
+                          title: Text("About Us"),
+                          onTap: (){
+                            Navigator.of(context).pop();
+                            Navigator.pushNamed(context, AboutUS.id);
+                          },
+                        ),
+                        ListTile(
+                          title: Text("Logout"),
+                          onTap: signOut,
+                        ),
+
+                      ],
+                    ),
+                  ),
+                ),
               body: TabBarView(
                 children: [
                   productView(jacketsCategory),
@@ -85,43 +117,45 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             )),
-        Material(
-          child: Container(
-            color: mainColor,
-            height: MediaQuery.of(context).size.height * 0.1,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  if (currentUser!=null) Text(
-                    currentUser.displayName ?? "User",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.shopping_cart),
-                        onPressed: () {
-                          Navigator.pushNamed(context, Cart.id);
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.close,),
-                        onPressed: () async {
-                          SharedPreferences pref = await SharedPreferences.getInstance();
-                          pref.setBool(keepMeLoggedIn, false);
-                          await _auth.signOUt();
-                          Navigator.popAndPushNamed(context, LoginScreen.id);
-                        },
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
-        )
+
+
+//        Material(
+//          child: Container(
+//            color: mainColor,
+//            height: MediaQuery.of(context).size.height * 0.1,
+//            child: Padding(
+//              padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
+//              child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                children: [
+//                  if (currentUser!=null) Text(
+//                    currentUser.displayName ?? "User",
+//                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+//                  ),
+//                  Row(
+//                    children: [
+//                      IconButton(
+//                        icon: Icon(Icons.shopping_cart),
+//                        onPressed: () {
+//                          Navigator.pushNamed(context, Cart.id);
+//                        },
+//                      ),
+//                      IconButton(
+//                        icon: Icon(Icons.close,),
+//                        onPressed: () async {
+//                          SharedPreferences pref = await SharedPreferences.getInstance();
+//                          pref.setBool(keepMeLoggedIn, false);
+//                          await _auth.signOUt();
+//                          Navigator.popAndPushNamed(context, LoginScreen.id);
+//                        },
+//                      ),
+//                    ],
+//                  )
+//                ],
+//              ),
+//            ),
+//          ),
+//        )
       ],
     );
   }
@@ -132,6 +166,13 @@ class _HomePageState extends State<HomePage> {
       currentUser = user;
     });
 
+  }
+
+  void signOut()async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+                          pref.setBool(keepMeLoggedIn, false);
+                          await _auth.signOUt();
+                          Navigator.popAndPushNamed(context, LoginScreen.id);
   }
 
 //  Widget productView(category) {

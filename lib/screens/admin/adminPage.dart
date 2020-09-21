@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:handeez/constants.dart';
 import 'package:handeez/screens/admin/Orders.dart';
 import 'package:handeez/screens/admin/addProduct.dart';
-import 'package:handeez/screens/admin/manageProduct.dart';
+import 'package:handeez/screens/admin/manageProducts.dart';
 
 class AdminPage extends StatelessWidget {
   static String id = "adminPage";

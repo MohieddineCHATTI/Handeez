@@ -34,7 +34,10 @@ class _ManageProductsState extends State<ManageProducts> {
                   pPrice: data[pPrice],
                   pDescription: data[pDescription],
                   pCategory: data[pCategory],
-                  pLocation: data[pLocation]));
+                  pLocation: data[pLocation],
+              url1: data[url1],
+              url2: data[url2],
+              url3: data[url3]));
             }
             return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -56,6 +59,7 @@ class _ManageProductsState extends State<ManageProducts> {
                           MyPopupMenuItem(
                             child: Text("Edit"),
                             onClick: () {
+                              Navigator.pop(context);
                               Navigator.pushNamed(context, EditProduct.id, arguments: products[index]);
                             },
                           ),
@@ -71,9 +75,8 @@ class _ManageProductsState extends State<ManageProducts> {
                   child: Stack(
                     children: [
                       Positioned.fill(
-                          child: Image(
-                        fit: BoxFit.fill,
-                        image: AssetImage(
+                          child: products[index].url1 != null ? Image.network(products[index].url1)
+                        : Image(image: AssetImage(
                             "assets/images/${products[index].pLocation}.jpg"),
                       )),
                       Positioned(

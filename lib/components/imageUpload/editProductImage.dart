@@ -1,24 +1,32 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:handeez/modals/product.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:handeez/components/imageUpload/uploader.dart';
 
-class AddImage extends StatefulWidget {
+class EditImage extends StatefulWidget {
   final Function(int, String) setImageUrl;
-  AddImage({this.setImageUrl});
+  final Product product;
+  EditImage({this.setImageUrl, this.product});
 
   @override
-  AddImageState createState() => AddImageState();
+  EditImageState createState() => EditImageState();
 }
 
-class AddImageState extends State<AddImage> {
+class EditImageState extends State<EditImage> {
   PickedFile _imageFile1;
   PickedFile _imageFile2;
   PickedFile _imageFile3;
   String _url1;
   String _url2;
   String _url3;
+  bool _removed1 = false;
+  bool _removed2 = false;
+  bool _removed3 = false;
+  bool _deleted1 = false;
+  bool _deleted2 = false;
+  bool _deleted3 = false;
 //TODO Add thumbnails for faster loading
   Future<void> _pickImage(ImageSource source, i) async {
     PickedFile selected = await ImagePicker().getImage(source: source, imageQuality: 70);
@@ -85,6 +93,27 @@ class AddImageState extends State<AddImage> {
     }
   }
 
+  void _changePicture (int i){
+    switch(i){
+      case 1:
+        setState(() {
+          _deleted1 = true;
+        });
+        break;
+      case 2:
+        setState(() {
+          _deleted2 = true;
+        });
+        break;
+      case 3:
+        setState(() {
+          _deleted3 = true;
+        });
+        break;
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -101,23 +130,19 @@ class AddImageState extends State<AddImage> {
                   children: <Widget>[
                     Column(
                       children: <Widget>[
-                        if (_imageFile1 != null) ...[
-                          Image.file(
-                            File(_imageFile1.path),
-                            width: 100,
-                            height: 100,
-                          ),
+                        if(_imageFile1 != null && _removed1 == false) ...[
+                          Image.file(File(_imageFile1.path), width: 100, height: 100,),
                           IconButton(
-                            icon: Icon(Icons.clear),
-                            onPressed: () {
-                              _clear(1);
-                            },
-                          ),
-                          Uploader(
-                            num: 1,
-                            file: File(_imageFile1.path),
-                            setUrl: setUrl,
-                          )
+                            icon:Icon(Icons.clear),
+                            onPressed: (){_clear(1);},),
+                          Uploader(num: 1, file: File(_imageFile1.path),setUrl: setUrl,)
+
+                        ] else if (widget.product.url1 != null && _deleted1 == false) ...[
+                          SizedBox(height: 20,),
+                          Image.network(widget.product.url1, width: 100, height: 100,),
+                          IconButton(
+                            icon:Icon(Icons.clear),
+                            onPressed: (){_changePicture(1);},),
                         ]
                       ],
                     ),

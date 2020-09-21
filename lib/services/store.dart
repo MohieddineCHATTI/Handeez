@@ -11,7 +11,10 @@ class Store {
       pPrice : product.pPrice,
       pDescription : product.pDescription,
       pLocation : product.pLocation,
-      pCategory : product.pCategory
+      pCategory : product.pCategory,
+      url1: product.url1,
+      url2: product.url2,
+      url3: product.url3
     });
   }
 

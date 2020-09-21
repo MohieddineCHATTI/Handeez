@@ -6,12 +6,17 @@ class CustomTextField extends StatelessWidget {
   final bool obsc;
   final Function onClick;
   final initialValue;
-  CustomTextField({@required this.icon, @required this.hint , this.obsc, @required this.onClick, this.initialValue});
+  final inputType;
+  CustomTextField({@required this.icon, @required this.hint , this.obsc, @required this.onClick, this.initialValue, this.inputType});
+  // ignore: missing_return
   String _errorMessage (String str){
     switch (str){
       case "Enter your email": return "Email is empty";
       case "Enter your password": return "Password is empty";
       case "Enter your name": return "Name is empty";
+      case "Product Name" : return "Enter product name";
+      case "Product Price" : return "Enter valid Product Price";
+      case "Product Description" : return "Please enter product description ";
     }
   }
 
@@ -24,6 +29,7 @@ class CustomTextField extends StatelessWidget {
         onSaved: onClick,
         initialValue: initialValue,
         cursorColor: mainColor,
+        keyboardType: inputType,
         obscureText: (obsc != null && obsc == true) ? true: false,
         decoration: InputDecoration(
             filled: true,

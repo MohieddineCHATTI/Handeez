@@ -47,7 +47,7 @@ class _UploaderState extends State<Uploader> {
               if(_uploadTask.isPaused) FlatButton(child: Icon(Icons.play_arrow),onPressed: (){ _uploadTask.resume();},),
               Container(child: LinearProgressIndicator(value: progressPercent), width: MediaQuery.of(context).size.width*.25,),
               Text("${(progressPercent*100).toStringAsFixed(2)} % "),
-              FlatButton(child: Text("click me"),onPressed: (){widget.setUrl(widget.num, imageUrl);},),
+
 
 
             ],

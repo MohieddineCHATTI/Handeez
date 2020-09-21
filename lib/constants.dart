@@ -20,4 +20,9 @@ const totalPrice = "totalPrice";
 const quantity = "quantity";
 const clientAddress = "address";
 const keepMeLoggedIn = "keepMeLoggedIn";
+const url1 = "url1";
+const url2 = "url2";
+const url3 = "url3";
+
+
 

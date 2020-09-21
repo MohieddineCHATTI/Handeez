@@ -11,6 +11,11 @@ class OrderDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     String docId = ModalRoute.of(context).settings.arguments;
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Order Details"),
+        backgroundColor: mainColor,
+        centerTitle: true,
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _store.loadOrderDetails(docId),
         builder: (context, snapshot){
@@ -29,37 +34,39 @@ class OrderDetails extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: products.length,
                     itemBuilder: (context, index) =>Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(20.0),
                       child: Container(
                         height: MediaQuery.of(context).size.height * .2,
                         width: MediaQuery.of(context).size.width,
-                        color: secondaryColor,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Product Name = ${products[index].pName}",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Quantity = ${products[index].quantity}",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Category = ${products[index].pCategory}",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                            ],
+                        color: mainColor,
+                        child: Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Product Name = ${products[index].pName}",
+                                  style: TextStyle(
+                                      fontSize: 18, fontWeight: FontWeight.bold),),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Quantity = ${products[index].quantity}",
+                                  style: TextStyle(
+                                      fontSize: 18, fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Category = ${products[index].pCategory}",
+                                  style: TextStyle(
+                                      fontSize: 18, fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

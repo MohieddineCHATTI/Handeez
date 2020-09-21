@@ -7,9 +7,9 @@ import 'package:handeez/constants.dart';
 import 'package:handeez/functions/getProductByCategory.dart';
 
 Widget productView(category) {
-  List <Product> _products = [];
+  List<Product> _products = [];
   final _store = Store();
-  return  StreamBuilder<QuerySnapshot>(
+  return StreamBuilder<QuerySnapshot>(
     stream: _store.loadProducts(),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
@@ -22,12 +22,14 @@ Widget productView(category) {
               pPrice: data[pPrice],
               pDescription: data[pDescription],
               pCategory: data[pCategory],
-              pLocation: data[pLocation]));
+              pLocation: data[pLocation],
+              url1: data[url1],
+              url2: data[url2],
+              url3: data[url3]));
         }
         _products = [...products];
         products.clear();
         products = getProductByCategory(category, _products);
-
 
         return GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -35,17 +37,18 @@ Widget productView(category) {
           itemBuilder: (context, index) => Padding(
             padding: const EdgeInsets.all(10),
             child: GestureDetector(
-              onTap: (){
-                Navigator.pushNamed(context, ProductInfo.id, arguments: products[index] );
+              onTap: () {
+                Navigator.pushNamed(context, ProductInfo.id,
+                    arguments: products[index]);
               },
               child: Stack(
                 children: [
                   Positioned.fill(
                       child: Image(
-                        fit: BoxFit.fill,
-                        image: AssetImage(
-                            "assets/images/${products[index].pLocation}.jpg"),
-                      )),
+                    fit: BoxFit.fill,
+                    image: products[index].url1 ==null ? AssetImage(
+                        "assets/images/${products[index].pLocation}.jpg") : NetworkImage(products[index].url1),
+                  )),
                   Positioned(
                     bottom: 0,
                     child: Opacity(
@@ -63,8 +66,7 @@ Widget productView(category) {
                               Text(products[index].pName),
                               Text(
                                 "\$ ${products[index].pPrice}",
-                                style:
-                                TextStyle(fontWeight: FontWeight.w700),
+                                style: TextStyle(fontWeight: FontWeight.w700),
                               ),
                             ],
                           ),
